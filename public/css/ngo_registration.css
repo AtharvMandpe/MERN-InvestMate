@@ -1,0 +1,91 @@
+html, body {
+  /* text-align: center; */
+  font-family: 'Montserrat', sans-serif;
+  line-height: 30px;
+  height : 100%;
+}
+
+h5{
+  color: #9DBDC6;
+}
+
+/* navbar section */
+#title .container-fluid {
+  padding: 3% 7% 7%;
+}
+
+.logo-img {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+}
+
+.navbar {
+  font-size: 1.4rem;
+}
+
+.nav-item {
+  padding-left: 1rem;
+}
+
+.colour {
+  color: pink;
+}
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f093fb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+    }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+
+    /* Footer */
+#footer-page {
+    text-align: center;
+    background-color: #272F32;
+    color : white;
+    /* position: relative; */
+  }
+  
+  .footer{
+    padding : 4% 6%;
+  }
+  
+  .footer-link{
+    margin: 20px 10px;
+  }
+  
+  .list_style {
+    padding-top: 10px;
+    margin-left: -32px;
+    list-style: none;
+  }
+  
+  #footer-page a{
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+  }
+    
+  #footer a:hover {
+    color: #CDFCF6;
+  }
+
+  .copyright {
+    background-color: #0E0E10;
+  }
+

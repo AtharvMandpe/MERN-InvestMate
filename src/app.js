@@ -5,9 +5,13 @@ const hbs = require('hbs');
 const bodyParser = require("body-parser");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const auth = require("./middleware/auth");
+
 require("./db/conn");
 const ngo_register = require("./models/ngo_register");
 const donor_register = require("./models/donor_register");
+
 
 
 const app = express();
@@ -19,12 +23,18 @@ const partials_path = path.join(__dirname, "../templates/partials");
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static(static_path));
 app.set("view engine", "hbs");
 app.set("views", template_path);
 hbs.registerPartials(partials_path);
 
 app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.get('/secret', auth, (req, res) => {
+    // console.log(`The cookie generated is : ${req.cookies.jwt}`);
     res.render('index');
 });
 
@@ -61,7 +71,11 @@ app.post("/login", async (req, res) => {
         const ismatch = await bcrypt.compare(password, useremail.password);
 
         const token = await useremail.generateAuthToken();
-        console.log(token);
+        console.log(`The token generated is : ${token}`);
+        res.cookie('jwt', token, {
+            expires : new Date(Date.now() + 30000),
+            httpOnly : true
+        });
 
         if (ismatch) {
             res.status(201).render('index');
@@ -95,6 +109,10 @@ app.post('/ngo_registration', async (req, res) => {
 
             const token = await register.generateAuthToken();
             console.log(token);
+            res.cookie('jwt', token, {
+                expires : new Date(Date.now() + 30000),
+                httpOnly : true
+            });
 
             const result = await register.save();
             console.log(result);
@@ -128,6 +146,10 @@ app.post('/donor_registration', async (req, res) => {
 
             const token = await register.generateAuthToken();
             console.log(token);
+            res.cookie('jwt', token, {
+                expires : new Date(Date.now() + 30000),
+                httpOnly : true
+            });
 
             const result = await register.save();
             console.log(result);

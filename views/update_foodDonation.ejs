@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form Using HTML/CSS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'poppins';
+  background-color: #ECEDEF;
+  color: #fff;
+  line-height: 1.8;
+}
+
+a{
+  text-decoration: none;
+}
+
+#container{
+  margin: 30px auto;
+  max-width: 430px;
+  padding: 20px;
+}
+
+.form-wrap{
+  background-color: #fff;
+  padding: 15px 25px;
+  color: #333;
+  border-top: 4px solid #49c1a2;
+  border-radius: 05px;
+}
+
+.form-wrap h1,
+.form-wrap p{
+  text-align: center;
+}
+
+.form-wrap .form-group{
+  margin-top: 15px;
+}
+
+.form-wrap .form-group label{
+  display: block;
+  color: #666;
+}
+
+.form-wrap .form-group input{
+  width: 100%;
+  padding: 10px;
+  border: #ddd 1px solid;
+  border-radius: 5px;
+}
+
+.form-wrap button{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #49c1a2;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #49c1a2;
+  font-family: 'poppins';
+  font-size: 15px;
+  transition: 1s;
+}
+
+.form-wrap button:hover{
+  background-color: #37a08e;
+  transition: 1s;
+}
+
+.form-wrap .bottom-text{
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 10px;
+  color: #333;
+}
+
+footer a {
+  color:#49c1a2
+}
+  </style>  
+   
+</head>
+<body>
+ 
+   <!-- Container Start -->
+  <div id="container">
+    <!-- Form Wrap Start -->
+    <div class="form-wrap">
+      <h1>Donation</h1>
+      <p>Food Details</p>
+      <!-- Form Start -->
+      <form  method="post" id="update_item">
+        <!-- <div class="form-group">
+          <label for="first-name">Food type</label>
+          <input type="checkbox" id="Solid" name="Solid" value="Solid">
+          <label for="solid">Solid</label><br>
+          
+        </div> -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="hidden" name="id" value="<%= item._id %>">
+          <input type="text" name="email" value="<%= item.email %>" id="Email">
+        </div>
+        <div class="form-group">
+          <label for="Food Description">Food Description</label>
+          <input type="text" name="Food_Description" value="<%= item.description %>" id="Food Description">
+        </div>
+        <div class="form-group">
+          <label for="food quantity">Food quantity</label>
+          <input type="text" name="Food_quantity" value="<%= item.quantity %>" id="Food quantity">
+        </div>
+        <div class="form-group">
+          <label for="Date">Donation Date</label>
+          <input type="text" name="date" value="<%= item.Date %>" id="Donation Date">
+        </div>
+        <div class="form-group">
+          <label for="Expiry_Date">Expiry Date</label>
+          <input type="text" name="expiry_date" value="<%= item.Expiry_Date %>" id="Expiry Date">
+        </div>
+        <!-- <div class="form-group">
+          <label for="cpass">Donation Time</label>
+          <input type="Time" name="time" id="first-name">
+        </div> -->
+        <!-- <p class="bottom-text">
+             <input type="checkbox" id="Food" name="Food" value="Food">I assure that food quality and hygiene is maintained.
+        </p> -->
+                <button type="submit">Confirm</button>
+        <button type="submit">Cancel</button>
+      </form>
+      <!-- Form Close -->
+    </div>
+    <!-- Form Wrap Close -->
+
+  </div>
+  <!-- Container Close -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/index.js"></script>
+
+</body>
+</html>

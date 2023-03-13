@@ -86,14 +86,18 @@
   </head>
   <body class="text-center">
 
-    {{!-- {{>navbar}} --}}
+    <!-- {{!-- {{>navbar}} --}} -->
     
 <main class="form-signin w-100 m-auto">
   <form action="/login" method="post">
     <img class="mb-4 edit" src="images/sign_up.png" alt="" width="72" height="57">
     <!-- <h1 class="h3 mb-3 fw-normal">Please sign in</h1> -->
     <div class="form-floating">
-      <input type="text" class="form-control top" id="floatingEmail" name="email" placeholder="First Name" required autofocus>
+      <input type="text" class="form-control top" id="floatingRole" name="role" placeholder="Ngo / Donor" required autofocus>
+      <label for="floatingRole">Role</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control top" id="floatingEmail" name="email" placeholder="First Name" required>
       <label for="floatingEmail">Email</label>
     </div>
     <div class="form-floating">
@@ -104,11 +108,11 @@
     <p class="mt-5 mb-3 text-muted">&copy; Share A Meal</p>
   </form>
 
-  {{!-- {{>footer}} --}}
+  <!-- {{!-- {{>footer}} --}} -->
 </main>
 
 
-        {{!-- {{>footer}} --}}
+        <!-- {{!-- {{>footer}} --}} -->
 
   </body>
 </html>

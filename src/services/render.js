@@ -1,4 +1,6 @@
 const axios = require('axios');
+const Zero_donation = require("../models/donation");
+
 
 exports.homeRoutes = (req, res) => {
     res.render('Zero_index');
@@ -19,6 +21,19 @@ exports.update_foodDonation = (req, res) => {
     // res.render('update_foodDonation');
 }
 
+// exports.update_foodDonation = (req, res, next) => {
+//     console.log(req.params.id);
+//     Zero_donation.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, docs) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             res.render("update_foodDonation", { item : docs.data});
+
+//         }
+//     });
+//     // res.render('update_foodDonation');
+// }
+
 exports.mission = (req, res) => {
     res.render('mission');
 }
@@ -38,6 +53,10 @@ exports.Zero_registeration = (req, res) => {
 exports.donorPage = (req, res) => {
     res.render('donorPage');
 }
+
+// exports.restaurantdash = (req, res) => {
+//     res.render('restaurantdash');
+// }
 
 // exports.viewDonation = (req, res) => {
 //     // Make a get request to /api/users
@@ -62,4 +81,15 @@ exports.foodAfter = (req, res) => {
    .catch(err => {
        res.send(err);
    })
+}
+
+exports.restaurantdash = (req, res) => {
+    axios.get('http://localhost:3000/restaurantdash', { params : { id : req.query.email }})
+        .then(function(userdata){
+            res.render("restaurantdash", { item : userdata.data})
+        })
+        .catch(err =>{
+            res.send(err);
+        })
+    // res.render('update_foodDonation');
 }

@@ -7,6 +7,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const axios = require('axios');
+
 
 
 const Zero_auth = require("./middleware/Zero_auth");
@@ -46,6 +48,10 @@ app.use('/', require('./routes/router'));
 //     res.render('viewDonation');
 // })
 
+
+
+
+
 app.post("/login", async (req, res) => {
     try {
         const password = req.body.password;
@@ -63,7 +69,7 @@ app.post("/login", async (req, res) => {
                 httpOnly: true
             });
             if (ismatch) {
-                res.status(201).redirect('donorPage');
+                res.status(201).redirect('/restaurantdash/' + useremail.email);
             }
             else {
                 res.render('failure');
@@ -75,7 +81,7 @@ app.post("/login", async (req, res) => {
             const token = await useremail.generateAuthToken();
             console.log(`The token generated is : ${token}`);
             res.cookie('token', token, {
-                expires: new Date(Date.now() + 200000),
+                expires: new Date(Date.now() + 20000000),
                 httpOnly: true
             });
             if (ismatch) {
@@ -111,7 +117,7 @@ app.get('/logout', Zero_auth, async (req, res) =>{
         console.log('logout successful');
 
         await req.user.save();
-        res.status(201).redirect('/');
+        res.status(201).redirect('/login');
     } catch (error) {
         
     }
@@ -134,7 +140,7 @@ app.get('/logout', Zero_auth, async (req, res) =>{
 //             // const token = await register.generateAuthToken();
 //             // console.log(token);
 //             // res.cookie('jwt', token, {
-//             //     expires: new Date(Date.now() + 200000),
+//             //     expires: new Date(Date.now() + 20000000),
 //             //     httpOnly: true
 //             // });
 
@@ -173,7 +179,7 @@ app.post('/Zero_registeration', async (req, res) => {
             const token = await register.generateAuthToken();
             console.log(token);
             res.cookie('token', token, {
-                expires: new Date(Date.now() + 200000),
+                expires: new Date(Date.now() + 20000000),
                 httpOnly: true
             });
 
@@ -210,7 +216,7 @@ app.post('/contact', async (req, res) => {
             // const token = await register.generateAuthToken();
             // console.log(token);
             // res.cookie('jwt', token, {
-            //     expires: new Date(Date.now() + 200000),
+            //     expires: new Date(Date.now() + 20000000),
             //     httpOnly: true
             // });
 
@@ -242,7 +248,7 @@ app.post('/contact', async (req, res) => {
 
 
 app.post("/failure", function (req, res) {
-    res.redirect('Zero_regiteration');
+    res.redirect('login');
 })
 
 app.listen(port, ()=> { 

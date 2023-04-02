@@ -1,20 +1,42 @@
 <% for(var i = 0; i < item.length; i++) { %>
-       <tr>
-          <td><%= i + 1 %></td>
-          <td><%= item[i].email%></td>
-          <td><%= item[i].description%></td>
-          <td><%= item[i].quantity %></td>
-          <td><%= item[i].Date%></td>
-          <td><%= item[i].Expiry_Date %></td>
-          <!-- <td><%= item[i].date%></td>
-          <td><%= item[i].time%></td> -->
-            <td>
-                <!-- <a href="/update_foodDonation?id=<%= item[i]._id%>" class="btn border-shadow update">
-                    <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
-                </a> -->
-                <a class="btn border-shadow delete" data-id=<%= item[i]._id %>>
-                    <span class="text-gradient"><i class="fas fa-times"></i></span>
-                </a>
-            </td>
-      </tr>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= item[i].email%></td>
+      <td><%= item[i].description%></td>
+      <td onclick="edit('<%= item[i]._id%>')"><a href="/update_foodDonation?id=<%= item[i]._id%>"><%= item[i].quantity%></a></td>
+      <td><%= item[i].Date%></td>
+      <td><%= item[i].Expiry_Date %></td>
+      <td>
+        <span class="text-gradient">
+          <i class="fa-regular fa-square fa-lg icon" onclick="toggleCheckbox(this, '<%= item[i]._id%>')"></i>
+        </span>
+      </td>
+    </tr>
   <% } %>
+  
+  <script>
+  // Load the state of the checkboxes from local storage
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkboxState = localStorage.getItem('checkboxState');
+    if (checkboxState) {
+      var checkboxes = document.querySelectorAll('.icon');
+      JSON.parse(checkboxState).forEach(function(state, i) {
+        checkboxes[i].classList.toggle('fa-square', !state);
+        checkboxes[i].classList.toggle('fa-square-check', state);
+      });
+    }
+  });
+  
+  // Toggle the state of the checkbox and store it in local storage
+  function toggleCheckbox(checkbox, id) {
+    var isChecked = checkbox.classList.contains('fa-square-check');
+    checkbox.classList.toggle('fa-square', isChecked);
+    checkbox.classList.toggle('fa-square-check', !isChecked);
+    var checkboxStates = [];
+    document.querySelectorAll('.icon').forEach(function(checkbox) {
+      checkboxStates.push(checkbox.classList.contains('fa-square-check'));
+    });
+    localStorage.setItem('checkboxState', JSON.stringify(checkboxStates));
+  }
+  </script>
+  

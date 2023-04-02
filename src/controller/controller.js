@@ -1,32 +1,30 @@
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
+
 const Zero_donation = require("../models/donation");
 
 // create and save new user
 exports.create = async (req, res) => {
     try {
+        const email = req.body.email 
         const donation = new Zero_donation({
-            email: req.body.email,
+            email: email,
             description: req.body.Food_Description,
             quantity: req.body.Food_quantity,
             Date: req.body.date,
             Expiry_Date: req.body.expiry_date,
         });
 
-        // const token = await register.generateAuthToken();
-        // console.log(token);
-        // res.cookie('jwt', token, {
-        //     expires: new Date(Date.now() + 200000),
-        //     httpOnly: true
-        // });
-
         const result = await donation.save();
         console.log(result);
-        res.status(201).render('donorPage');
+        res.redirect('/restaurantdash/' + email);
    
-} catch (error) {
-    res.status(400).send(error);
-    console.log(error);
+    } catch (error) {
+        res.status(400).send(error);
+        console.log(error);
+    }
 }
-}
+
 
 // retrieve and return all users/ retrive and return a single user
 exports.find = (req, res) => {
@@ -42,7 +40,7 @@ exports.find = (req, res) => {
                 }
             })
             .catch(err =>{
-                res.status(500).send({ message: "Erro retrieving user with id " + id})
+                res.status(500).send({ message: "Error retrieving user with id " + id})
             })
 
     }else{
@@ -58,25 +56,39 @@ exports.find = (req, res) => {
 
 // Update a new idetified user by user id
 exports.update = (req, res) => {
-    if(!req.body){
-        return res
-            .status(400)
-            .send({ message : "Data to update can not be empty"})
+    const id = req.params.id;
+    const update = req.body;
+    console.log(id);
+    console.log(update);
+    const options = { useFindAndModify: false, new: true };
+    
+    if (!id) {
+        return res.status(400).send({ message: 'Missing ID parameter' });
     }
 
-    const id = req.params.id;
-    Zero_donation.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send({ message: 'Invalid ID parameter' });
+    }
+
+    if (Object.keys(update).length === 0) {
+        return res.status(400).send({ message: 'Missing update data' });
+    }
+
+    Zero_donation.findByIdAndUpdate(id, update, options)
         .then(data => {
-            if(!data){
-                res.status(404).send({ message : `Cannot Update user with ${id}. Maybe user not found!`})
-            }else{
-                res.send(data)
+            if (!data) {
+                return res.status(404).send({ message: `Could not find user with ID ${id}` });
             }
+            res.send(data);
+            console.log(`User with ID ${id} updated successfully`);
         })
-        .catch(err =>{
-            res.status(500).send({ message : "Error Update user information"})
-        })
-}
+        .catch(err => {
+            console.error(err);
+            res.status(500).send({ message: 'Error updating user' });
+        });
+};
+
+
 
 // Delete a user with specified user id in the request
 exports.delete = (req, res) => {
@@ -97,4 +109,17 @@ exports.delete = (req, res) => {
                 message: "Could not delete User with id=" + id
             });
         });
+}
+
+// Display donations of users
+exports.findByEmail = async (req, res) => {
+    try {
+        const email = req.params.email;
+        const donations = await Zero_donation.find({ email: email });
+
+        res.render('restaurantdash', { item: donations });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
 }

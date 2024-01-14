@@ -1,29 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
-const Zero_donation = require("../models/donation");
-
-// create and save new user
-exports.create = async (req, res) => {
-    try {
-        const email = req.body.email 
-        const donation = new Zero_donation({
-            email: email,
-            description: req.body.Food_Description,
-            quantity: req.body.Food_quantity,
-            Date: req.body.date,
-            Expiry_Date: req.body.expiry_date,
-        });
-
-        const result = await donation.save();
-        console.log(result);
-        res.redirect('/restaurantdash/' + email);
-   
-    } catch (error) {
-        res.status(400).send(error);
-        console.log(error);
-    }
-}
+const Zero_donation = require("../models/product");
 
 
 // retrieve and return all users/ retrive and return a single user
@@ -54,39 +32,20 @@ exports.find = (req, res) => {
     }
 }
 
-// Update a new idetified user by user id
+
 exports.update = (req, res) => {
     const id = req.params.id;
-    const update = req.body;
-    console.log(id);
-    console.log(update);
-    const options = { useFindAndModify: false, new: true };
-    
-    if (!id) {
-        return res.status(400).send({ message: 'Missing ID parameter' });
-    }
+    const data = req.body;
+  
+    Zero_donation.findByIdAndUpdate(id, data, { new: true }, (err, user) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(user);
+      }
+    });
+  };
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).send({ message: 'Invalid ID parameter' });
-    }
-
-    if (Object.keys(update).length === 0) {
-        return res.status(400).send({ message: 'Missing update data' });
-    }
-
-    Zero_donation.findByIdAndUpdate(id, update, options)
-        .then(data => {
-            if (!data) {
-                return res.status(404).send({ message: `Could not find user with ID ${id}` });
-            }
-            res.send(data);
-            console.log(`User with ID ${id} updated successfully`);
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).send({ message: 'Error updating user' });
-        });
-};
 
 
 
@@ -111,13 +70,30 @@ exports.delete = (req, res) => {
         });
 }
 
-// Display donations of users
+// Find donation by ID
+exports.findById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const donation = await Zero_donation.findById(id);
+
+        if (!donation) {
+            // Handle the case where the donation with the provided ID was not found
+            return res.status(404).send("Donation not found");
+        }
+
+        res.render('product_detail', { product: donation });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
 exports.findByEmail = async (req, res) => {
     try {
         const email = req.params.email;
         const donations = await Zero_donation.find({ email: email });
 
-        res.render('restaurantdash', { item: donations });
+        res.render('seller_dash', { item: donations });
     } catch (error) {
         console.log(error);
         res.status(500).send(error);

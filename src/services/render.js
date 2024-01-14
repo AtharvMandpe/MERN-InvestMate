@@ -1,38 +1,14 @@
 const axios = require('axios');
-const Zero_donation = require("../models/donation");
+const Zero_donation = require("../models/product");
 
 
 exports.homeRoutes = (req, res) => {
-    res.render('Zero_index');
+    res.render('home_page');
 }
 
-exports.foodDonation = (req, res) => {
-    res.render('foodDonation');
+exports.add_new_product = (req, res) => {
+    res.render('add_new_product');
 }
-
-exports.update_foodDonation = (req, res) => {
-    axios.get('http://localhost:3000/api/users', { params : { id : req.query.id }})
-        .then(function(userdata){
-            res.render("update_foodDonation", { item : userdata.data})
-        })
-        .catch(err =>{
-            res.send(err);
-        })
-    // res.render('update_foodDonation');
-}
-
-// exports.update_foodDonation = (req, res, next) => {
-//     console.log(req.params.id);
-//     Zero_donation.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, docs) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             res.render("update_foodDonation", { item : docs.data});
-
-//         }
-//     });
-//     // res.render('update_foodDonation');
-// }
 
 exports.mission = (req, res) => {
     res.render('mission');
@@ -43,53 +19,25 @@ exports.login = (req, res) => {
 }
 
 exports.contact = (req, res) => {
-    res.render('contact');
+    res.render('mate_contact');
 }
 
-exports.Zero_registeration = (req, res) => {
-    res.render('Zero_registeration');
+exports.mate_register = (req, res) => {
+    res.render('mate_register');
 }
 
-exports.donorPage = (req, res) => {
-    res.render('donorPage');
+exports.add_to_cart = (req, res) => {
+    res.render('add_to_cart');
 }
 
-// exports.restaurantdash = (req, res) => {
-//     res.render('restaurantdash');
-// }
-
-// exports.viewDonation = (req, res) => {
-//     // Make a get request to /api/users
-//    axios.get('http://localhost:3000/api/users')
-//    .then(function (response) {
-//        console.log(response.data);
-//        res.render('viewDonation', { item: response.data });
-//    })
-//    .catch(err => {
-//        res.send(err);
-//    })
-//     // res.render('viewDonation');
-// }
-
-exports.foodAfter = (req, res) => {
+exports.show_product = (req, res) => {
    // Make a get request to /api/users
-   axios.get('http://localhost:3000/api/users')
+   axios.get('http://localhost:8000/api/users')
    .then(function (response) {
        console.log(response.data);
-       res.render('foodAfter', { item: response.data });
+       res.render('product_show', { products: response.data });
    })
    .catch(err => {
        res.send(err);
    })
-}
-
-exports.restaurantdash = (req, res) => {
-    axios.get('http://localhost:3000/restaurantdash', { params : { id : req.query.email }})
-        .then(function(userdata){
-            res.render("restaurantdash", { item : userdata.data})
-        })
-        .catch(err =>{
-            res.send(err);
-        })
-    // res.render('update_foodDonation');
 }

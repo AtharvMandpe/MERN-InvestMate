@@ -5,22 +5,22 @@ const jwt = require('jsonwebtoken')
 mongoose.set('strictQuery', true);
 
 const RegisterSchema = new mongoose.Schema({
-    firstname: {
+    fullname: {
         type: String,
         required: true
     },
-    middlename: {
-        type: String,
-        required: true
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
-    state: {
-        type: String,
-        required: true
-    },
+    // middlename: {
+    //     type: String,
+    //     required: true
+    // },
+    // lastname: {
+    //     type: String,
+    //     required: true
+    // },
+    // state: {
+    //     type: String,
+    //     required: true
+    // },
     email: {
         type: String,
         required: true,
@@ -35,11 +35,11 @@ const RegisterSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    address: {
-        type: String,
-        required: true,
-        // unique: true
-    },
+    // address: {
+    //     type: String,
+    //     required: true,
+    //     // unique: true
+    // },
     password: {
         type: String,
         required: true

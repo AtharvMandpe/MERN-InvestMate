@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/contact_page.css"> <!-- Add your CSS file -->
+  <title>Contact Us</title>
+</head>
+<body>
+  <!-- <header>
+    <nav>
+      <div class="logo">
+        <h1>InvestMate</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="mate_register">Register</a></li>
+        <li><a href="resources/resources.html">Resources</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="mate_contact">Contact Us</a></li>
+      </ul>
+      <div class="navbar-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+  </header> -->
+
+  <div class="container">
+    <div class="title">Contact Us</div>
+    <div class="content">
+      <form action="/contact" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Your Name</span>
+            <input type="text" placeholder="Enter your name" name="fullname" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Your Email</span>
+            <input type="email" placeholder="Enter your email" name="email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Subject</span>
+            <input type="text" placeholder="Enter the subject" name="subject" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Message</span>
+            <textarea placeholder="Enter your message" name="message" required></textarea>
+          </div>
+        </div>
+
+        <div class="button">
+          <input type="submit" value="Send Message">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

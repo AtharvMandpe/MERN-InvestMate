@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>InvestMate</title>
+    <link rel="stylesheet" type="text/css" href="css/home_page.css">
+    <style>
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: #333;
+                text-align: center;
+                z-index: 99;
+            }
+
+            .nav-links li {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .nav-links a {
+                color: #fff;
+            }
+
+            .navbar-toggle {
+                position: absolute;
+                top: 30px;
+                right: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 30px;
+                height: 21px;
+                cursor: pointer;
+                z-index: 999;
+            }
+
+            .navbar-toggle .bar {
+                height: 3px;
+                width: 100%;
+                background-color: #fff;
+                transition: all 0.3s ease;
+            }
+
+            .change .navbar-toggle .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .change .navbar-toggle .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .change .navbar-toggle .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero {
+                height: calc(100vh - 80px);
+            }
+
+            .container.top {
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>InvestMate</h1>
+            </div>
+            <ul class="nav-links" style="padding-left:730px;">
+                <li><a href="#">Home</a></li>
+                <li><a href="login">Login</a></li>
+                <!-- <li><a href="investorLogin/register.php">For Investors</a></li> -->
+                <!-- <li><a href="index">Resources</a></li> -->
+                <li><a href="#">About Us</a></li>
+                <li><a href="mate_contact">Contact Us</a></li>
+            </ul>
+            <div class="navbar-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+        <div class="hero">
+            <div class="container top">
+                <h1>Invest in the future</h1>
+                <p>Discover and invest in the best startups</p>
+                <a href="mate_register" class="btn btn-primary">Register</a>
+                <!-- <a href="investorLogin/register.php" class="btn btn-primary"
+                    style="margin-left: 10px;">As Investor</a> -->
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="features">
+            <div class="container">
+                <h2 style="padding-bottom: 10px;">Why Choose InvestMate ?</h2>
+                <div class="feature">
+                    <div class="icon">
+                        <img src="images/startup.jpeg" alt="Feature 1 icon">
+                    </div>
+                    <div class="content">
+                        <h3>Invest in startups</h3>
+                        <p>Discover and invest in the best startups</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="icon">
+                        <img src="images/home2.jpeg" alt="Feature 2 icon">
+                    </div>
+                    <div class="content">
+                        <h3>Expert guidance</h3>
+                        <p>Get expert guidance and support from experienced investors</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="icon">
+                        <img src="images/home3.jpeg" alt="Feature 3 icon">
+                    </div>
+                    <div class="content">
+                        <h3>Access to top startups</h3>
+                        <p>Access to top startups and exclusive investment opportunities</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="testimonial">
+            <div class="container">
+                <h2>What Our Investors Say</h2>
+                <div class="testimonial-slide">
+                    <div class="testimonial-item">
+                        <p>"InvestMate has helped me discover and invest in some of the most promising startups. The
+                            platform is easy to use and the support team is always available to help."</p>
+                        <div class="author">
+                            <img src="images/home4.jpeg" alt="Author 1 photo">
+                            <p>John Doe</p>
+                            <p>Investor</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"InvestMate has helped me to raise investment for my startup. The platform is easy
+                            to use and the support team is always avilable to help"</p>
+                        <div class="author">
+                            <img src="images/home5.jpeg" alt="Author 2 photo">
+                            <p>Angela Yu</p>
+                            <p>Maker</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const navbarToggle = document.querySelector('.navbar-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        navbarToggle.addEventListener('click', () => {
+            navbarToggle.classList.toggle('change');
+            navLinks.classList.toggle('change');
+        });
+    </script>
+</body>
+
+</html>

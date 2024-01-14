@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="/css/product_detail.css">
+    <link rel="stylesheet" href="/css/add_to_cart.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!--box-icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="product-page-container">
+        <!--route-->
+        <span class="link-route">
+            <a href="#">Products</a> > <a href="#">Detail</a>
+        </span>
+    </div>
+
+    <section class="product-page">
+        <!--img-->
+        <img class="product-page-img" src="/backend_images/<%= product.Image %>" alt="..." />
+        <!--details-->
+        <div class="product-page-details">
+
+            <!--title-->
+            <strong>
+                <%= product.Title %>
+            </strong>
+
+            <span class="price">₹ <%= product.Price %></span>
+            <!--details-->
+            <p class="small-desc">
+                <%= product.Description %>
+            </p>
+            <span class="product-page-offer">20% discount</span>
+            <!--cart btn-->
+
+            <!--price and shipping-->
+            <div class="price-shipping">
+                <strong>+RS.100 shipping</strong>
+            </div>
+        </div>
+    </section>
+    <!--product-info-->
+    <section class="product-all-info">
+        <!--menu-->
+        <ul class="product-info-menu">
+            <li class="p-info-list active" data-filter="Highlights">Highlights</li>
+            <a href="#">
+                <li class="p-info-list" data-filter="Materials">Materials</li>
+            </a>
+            <li class="p-info-list" data-filter="About">About</li>
+        </ul>
+        <div class="info-container Highlights active ">
+            <p>
+                <%= product.Description %>
+            </p>
+        </div>
+        <div class="info-container Materials">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita alias ex magnam unde necessitatibus
+                atque ullam tempora, quidem doloribus quisquam numquam quaerat, optio totam vitae temporibus! Ipsum
+                exercitationem est quas?</p>
+        </div>
+        <div class="info-container About">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita alias ex magnam unde necessitatibus
+                atque ullam tempora, quidem doloribus quisquam numquam quaerat, optio totam vitae temporibus! Ipsum
+                exercitationem est quas?</p>
+        </div>
+    </section>
+
+    <script text="text/javascript">
+        //product info menu
+        $(document).on('click', '.product-info-menu li', function () {
+            $(this).addClass('active').siblings().removeClass('active')
+        });
+        //product-info-filter
+        $(document).ready(function () {
+
+            $('.p-info-list').click(function () {
+                const value = $(this).attr('data-filter');
+                if (value == 'all') {
+                    $('.info-container').filter('.' + value).show('1000');
+
+                }
+                else {
+                    $('.info-container').not('.' + value).hide('1000');
+                    $('.info-container').filter('.' + value).show('1000');
+                }
+            });
+
+        });
+
+        // // Add click event listeners to the buttons
+        // const addToCartButton = document.getElementById("addToCartButton");
+
+        // addToCartButton.addEventListener("click", function () {
+        //     // Get the product details
+        //     const productId = "<%= product._id %>";
+        //     const productImage = "<%= product.Image %>";
+        //     const productTitle = "<%= product.Title %>";
+
+        //     // Construct the URL with query parameters
+        //     // const addToCartURL = `add_to_cart?productId=${productId}&productImage=${productImage}&productTitle=${productTitle}`;
+        //     const addToCartURL = 'add_to_cart';
+
+        //     // Redirect to the cart page with product details
+        //     window.location.href = addToCartURL;
+        // });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,
+				initial-scale=1.0">
+	<title>restaurant</title>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/90ea645b5c.js" crossorigin="anonymous"></script>
+
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+	<!-- Bootstrap JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/dashboardStyle.css">
+	<link rel="stylesheet" href="/css/responsive.css">
+	
+
+
+	<script src="/js/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+</head>
+
+<body onload="showFirstFiveRows()">
+
+	<!-- for header part -->
+	<header>
+
+		<div class="logosec">
+			<div class="logo">Buyer</div>
+			<!-- <img src="/images/toggle.jpg" class="icn menuicn" id="menuicn" alt="menu-icon"> -->
+		</div>
+<!-- 
+		<div class="searchbar">
+			<input type="text" placeholder="Search">
+			<div class="searchbtn">
+			</div>
+		</div> -->
+
+		<!-- <div class="message">
+			<div class="circle"></div>
+
+			<div class="dp">
+				<img src="/images/profile.png" class="dpicn" alt="dp">
+			</div>
+		</div> -->
+
+	</header>
+
+	<div class="main-container">
+		<div class="navcontainer">
+			<nav class="nav">
+				<div class="nav-upper-options">
+					<div class="nav-option option1">
+
+						<h3> Dashboard</h3>
+						<img src="/images/R.png" class="nav-img" alt="dashboard">
+					</div>
+
+					<div class="nav-option option3">
+						<i class="fa fa-product-hunt" aria-hidden="true"></i>
+						<!-- <h3> Add Donations</h3> -->
+						<a href="/add_new_product"> Add Product</a>
+
+					</div>
+					<div class="nav-option logout">
+						<i class="fa fa-sign-out" aria-hidden="true"></i>
+						<!-- <h3>Logout</h3> -->
+						<a href="/logout"> Logout</a>
+					</div>
+
+				</div>
+			</nav>
+		</div>
+		<div class="main">
+			<div class="box-container">
+				<div class="box box1">
+					<div class="text">
+						<h2 class="topic-heading" id="total-listed-food"></h2>
+						<h2 class="topic">Total Listed Product</h2>
+					</div>
+				</div>
+
+				<!-- <div class="box box2">
+					<div class="text">
+						<h2 class="topic-heading" id="request-completed"></h2>
+						<h2 class="topic">Request Completed</h2>
+					</div>
+				</div> -->
+			</div>
+			<div>
+				<div class="report-container">
+					<div class="report-header">
+						<h1 class="recent-donation">Products</h1>
+						<button onclick="toggleRows()" class="btn btn-primary view-all-btn" id="showButton">Show
+							All</button>
+					</div>
+
+					<div class="container">
+						<table class="table" id="myTable">
+							<thead class="thead-dark">
+								<tr>
+									<th>Sr No.</th>
+									<!-- <th>Email</th> -->
+									<th>Image</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<%- include('_show') %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script>
+		const requestCompleted = document.getElementById('request-completed');
+		const table = document.getElementById('myTable');
+		let count = 0;
+	  
+		table.querySelectorAll('tr').forEach(row => {
+		  const checkboxIcon = row.querySelector('.fa-square, .fa-square-check');
+		  if (checkboxIcon && checkboxIcon.classList.contains('fa-square-check')) {
+			count++;
+		  }
+		});
+	  
+		requestCompleted.textContent = count;
+	  </script>
+	  
+</body>
+
+</html>

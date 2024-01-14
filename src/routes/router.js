@@ -3,7 +3,7 @@ const route = express.Router()
 const path = require('path');
 
 
-const Zero_auth = require("../middleware/Zero_auth");
+const Zero_auth = require("../middleware/auth");
 const services = require('../services/render');
 const controller = require('../controller/controller');
 
@@ -17,40 +17,32 @@ route.use(express.static(static_path));
  *  @method GET /
  */
 route.get('/', services.homeRoutes);
-route.get('/Zero_index', services.homeRoutes);
+route.get('/home_page', services.homeRoutes);
 
 /**
  *  @description mission
  *  @method GET /mission
  */
-route.get('/mission', services.mission);
 
-route.get('/Zero_registeration', services.Zero_registeration);
+route.get('/mate_register', services.mate_register);
 
-route.get('/contact', services.contact);
+route.get('/mate_contact', services.contact);
 
 route.get("/login", services.login);
 
-route.get('/foodDonation', Zero_auth, services.foodDonation)
+route.get('/add_new_product', Zero_auth, services.add_new_product)
 
-// route.get('/update_foodDonation', Zero_auth, services.update_foodDonation)
-route.get('/update_foodDonation', Zero_auth, services.update_foodDonation)
+route.get("/product_show", Zero_auth,  services.show_product);
 
-route.get("/foodAfter", Zero_auth, services.foodAfter);
-
-// route.get("/viewDonation", Zero_auth, services.viewDonation);
-
-route.get("/donorPage", Zero_auth, services.donorPage);
-
-route.get('/restaurantdash', Zero_auth, services.restaurantdash)
-
+route.get("/add_to_cart", Zero_auth, services.add_to_cart);
 
 // API
-route.post('/foodDonation', controller.create);
+// route.post('/upload', controller.create);
 route.get('/api/users', controller.find);
 route.put('/api/users/:id', controller.update);
 route.delete('/api/users/:id', controller.delete);
-route.get('/restaurantdash/:email', controller.findByEmail);
+route.get('/product_detail/:id', Zero_auth, controller.findById);
+route.get('/seller_dash/:email', Zero_auth, controller.findByEmail);
 
 
 

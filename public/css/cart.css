@@ -1,0 +1,17 @@
+.btn1{
+    padding:6px ;
+    background-color: #77dd77;
+    font-weight: 200;
+    border-radius: 5px;
+    margin:none;
+}
+.token{
+    padding: 7px 20px;
+    background-color: white;
+    border: 1px solid #77dd77;
+    color:#8177dd ;
+    font-weight: bold;
+    margin-left: 35rem;
+    margin-right: 1rem;
+    position: relative;
+}
